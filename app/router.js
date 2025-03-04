@@ -9,5 +9,6 @@ Router.map(function () {
     this.route('band', { path: ':id' }, function () {
       this.route('songs');
     });
+    this.route('new');
   });
 });
