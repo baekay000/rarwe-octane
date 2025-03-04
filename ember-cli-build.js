@@ -9,6 +9,7 @@ module.exports = function (defaults) {
       compile: {
         plugins: [
           require('tailwindcss')('./app/styles/tailwind/tailwind.config.js'), // Ensure Tailwind is here
+          require('autoprefixer'), // Ensure Autoprefixer is here
         ],
       },
     },

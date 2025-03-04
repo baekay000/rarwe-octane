@@ -72,5 +72,8 @@
   },
   "ember": {
     "edition": "octane"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.20"
   }
 }
