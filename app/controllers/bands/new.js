@@ -8,6 +8,20 @@ export default class BandsNewController extends Controller {
   @service router;
 
   @tracked name;
+  constructor() {
+    super(...arguments);
+    this.router.on('routeWillChange', (transition) => {
+      if (transition.from.name === 'bands.new') {
+        if (this.name) {
+          let leave = window.confirm('You have unsaved changes. Are you sure?');
+          if (!leave) {
+            transition.abort();
+          }
+        }
+      }
+    });
+  }
+
   @action
   updateName(event) {
     this.name = event.target.value;

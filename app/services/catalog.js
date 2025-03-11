@@ -64,11 +64,18 @@ export default class CatalogService extends Service {
   }
 
   async fetchRelated(record, relationship) {
+    console.log(record.relationships);
     let url = record.relationships[relationship];
     let response = await fetch(url);
     let json = await response.json();
     if (isArray(json.data)) {
       record[relationship] = this.loadAll(json);
+
+      // Fix: Add code to map each song to a band
+      record[relationship].forEach((song) => {
+        song.band = record.id;
+        console.log(song);
+      });
     } else {
       record[relationship] = this.load(json);
     }
@@ -112,12 +119,14 @@ export default class CatalogService extends Service {
     });
   }
 
+  /* This will be called as add('band', record) OR add('song', record)*/
   add(type, record) {
     let collection = type === 'band' ? this.storage.bands : this.storage.songs;
     let recordIds = collection.map((record) => record.id);
     if (!recordIds.includes(record.id)) {
       collection.push(record);
     }
+    return record;
   }
 
   get bands() {

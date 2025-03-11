@@ -6,6 +6,8 @@ module.exports = {
     './app/styles/**/*.{css,scss}', // Optionally, if you have styles in `app/styles` (CSS/SCSS files)
     './app/**/*.{js,ts}', // Include all JS and TS files in the `app` folder (if you use any JS for class names)
     './public/index.html',
+    './app/**/*.html',
+    './app/**/*.hbs',
   ],
   theme: {
     extend: {},
