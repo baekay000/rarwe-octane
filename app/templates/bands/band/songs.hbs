@@ -12,7 +12,7 @@
     {{/each}}
   </ul>
 {{else}}
-  <p class="text-center">
+  <p class="text-center" data-test-rr="no-songs-text">
     The band has no songs yet.
   </p>
 {{/if}}
@@ -36,6 +36,7 @@
       class="text-gray-800 bg-white rounded-md py-2 px-4"
       placeholder="Title"
       value={{this.title}}
+      data-test-rr="new-song-title"
       {{on "input" this.updateTitle}}
     />
     <button
@@ -48,6 +49,7 @@
     <button
       type="button"
       class="ml-2 px-4 p-2 rounded bg-white border border-bg-purple-600 shadow-md text-purple-600 hover:shadow-lg"
+      data-test-rr="save-song-button"
       {{on "click" this.cancel}}
     >
       Cancel
