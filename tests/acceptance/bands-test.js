@@ -64,7 +64,7 @@ module('Acceptance | bands', function (hooks) {
       .exists({ count: 2 }, 'A new song is rendered');
     assert
       .dom('[data-test-rr="song-list-item"]:last-child')
-      .hasText('New New Song', 'The new song is rendered as the last item');
+      .hasText('Singing', 'The new song is rendered as the last item');
     assert
       .dom('[data-test-rr="songs-nav-item"] > .active')
       .exists('The Songs tab is active');
