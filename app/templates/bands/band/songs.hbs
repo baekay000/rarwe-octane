@@ -3,10 +3,13 @@
 {{#if @model.songs.length}}
   <ul>
     {{#each @model.songs as |song|}}
-      <li class="mb-2">
+      <li class="mb-2" data-test-rr="song-list-item">
         {{song.title}}
         <span class="float-right">
-          <StarRating @rating={{song.rating}} @onUpdate={{fn this.updateRating song}} />
+          <StarRating
+            @rating={{song.rating}}
+            @onUpdate={{fn this.updateRating song}}
+          />
         </span>
       </li>
     {{/each}}
@@ -22,6 +25,7 @@
     <button
       type="button"
       class="px-4 py-2 rounded bg-purple-600 shadow-md hover:shadow-lg hover:text-white hover:bg-purple-500 focus:outline-none"
+      data-test-rr="new-song-button"
       {{on "click" (set this "showAddSong" false)}}
     >
       Add song
@@ -42,6 +46,7 @@
     <button
       type="button"
       class="ml-4 px-4 py-2 rounded bg-purple-600 shadow-md hover:shadow-lg hover:text-white"
+      data-test-rr="save-song-button"
       {{on "click" this.saveSong}}
     >
       Save
@@ -49,7 +54,6 @@
     <button
       type="button"
       class="ml-2 px-4 p-2 rounded bg-white border border-bg-purple-600 shadow-md text-purple-600 hover:shadow-lg"
-      data-test-rr="save-song-button"
       {{on "click" this.cancel}}
     >
       Cancel

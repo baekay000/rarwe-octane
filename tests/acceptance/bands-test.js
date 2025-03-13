@@ -3,7 +3,10 @@ import { visit, waitFor } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { getPageTitle } from 'ember-page-title/test-support';
-import { createBand } from 'rarwe-octane/tests/helpers/custom-helpers';
+import {
+  createBand,
+  createSong,
+} from 'rarwe-octane/tests/helpers/custom-helpers';
 
 module('Acceptance | bands', function (hooks) {
   setupApplicationTest(hooks);
@@ -41,6 +44,27 @@ module('Acceptance | bands', function (hooks) {
     assert
       .dom('[data-test-rr="band-list-item"]:last-child')
       .hasText('Caspian', 'The new band link is rendered as the last item');
+    assert
+      .dom('[data-test-rr="songs-nav-item"] > .active')
+      .exists('The Songs tab is active');
+  });
+
+  test('Create a song', async function (assert) {
+    await visit('/');
+    await createBand('Caspian');
+    await waitFor('[data-test-rr="no-songs-text"]');
+
+    await createSong('Singing');
+    await waitFor('[data-test-rr="new-song-button"]');
+    await createSong('New New Song');
+    await waitFor('[data-test-rr="new-song-button"]');
+
+    assert
+      .dom('[data-test-rr="song-list-item"]')
+      .exists({ count: 2 }, 'A new song is rendered');
+    assert
+      .dom('[data-test-rr="song-list-item"]:last-child')
+      .hasText('New New Song', 'The new song is rendered as the last item');
     assert
       .dom('[data-test-rr="songs-nav-item"] > .active')
       .exists('The Songs tab is active');
